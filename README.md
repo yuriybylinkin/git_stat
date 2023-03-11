@@ -13,8 +13,8 @@
 > Любой репозиторий git может содержать массу информации о коммитах, участниках и файлах. Извлечение этой информации не всегда просто, в основном потому, что существует огромное количество опций для огромного количества команд git — не думаю, что есть хоть один человек, который знает их все. Наверное, даже сам Линус Торвальдс не знает их:)
 
 Давайте посмотрим, как выглядит статистика, получаемая **git-quick-stats**. Для получения этих картинок я обработал срепозиторий приложения git-quick-stats.
-![git-commit-per-author](https://github.com/yuriybylinkin/git_stat/raw/main/Image/01 Intro-git-commit-per-author.png)
-![git-commit-per-year](https://github.com/yuriybylinkin/git_stat/raw/main/Image/02 Intro-git-commit-per-year.png)
+![git-commit-per-author](https://github.com/yuriybylinkin/git_stat/raw/main/Image/01-Intro-git-commit-per-author.png)
+![git-commit-per-year](https://github.com/yuriybylinkin/git_stat/raw/main/Image/02-Intro-git-commit-per-year.png)
 
 Интересно, правда?
 
@@ -39,22 +39,44 @@
 ## Установка
 
 В deb-дистрибутивах линукс (Debian, Ubuntu и остальные) команда установки очень проста:
+
 `apt install git-quick-stats`
+
 В остальных нужно склонировать репо и установить приложение:
+
 `git clone https://github.com/arzzen/git-quick-stats.git && cd git-quick-stats`
+
 `sudo make install`
+
 Для Windows, если мы собираемся пользоваться git bash можно просто склонировать репо в нужный каталог:
+
 `git clone https://github.com/arzzen/git-quick-stats.git`
 
 ## Использование
 
 Мне нравится git-клиент **GitExtensions**, на его примере покажу, как я запускаю это приложение. В **GitExtensions** открываю локальный репозитарий (в данном примере сам склонированный репо **git-quick-stats**), перехожу во вкладку Console.
-![gitextensions](https://github.com/yuriybylinkin/git_stat/raw/main/Image/03 Use-git-extensions.png)
+
+![gitextensions](https://github.com/yuriybylinkin/git_stat/raw/main/Image/03-Use-git-extensions.png)
+
 В консоли пишу путь к файлу скрипта git-quick-stats. Репо я склонировал в каталог Git на диске C, значит путь будет следующим:
+
 `C:/GIT/git-quick-stats/git-quick-stats`
-![gitextensions-console](https://github.com/yuriybylinkin/git_stat/raw/main/Image/04 Use-git-extensions-console.png)
+
+![gitextensions-console](https://github.com/yuriybylinkin/git_stat/raw/main/Image/04-Use-git-extensions-console.png)
+
 И нажимаю на **Enter**
 Запускается приложение в интерактивном режиме:
-![interactive-menu](https://github.com/yuriybylinkin/git_stat/raw/main/Image/05 Use-interactive-menu.png)
+
+![interactive-menu](https://github.com/yuriybylinkin/git_stat/raw/main/Image/05-Use-interactive-menu.png)
+
+Нужно вписать номер нужной функции и нажать **Enter**
+
+![contribution-stats](https://github.com/yuriybylinkin/git_stat/raw/main/Image/06-Use-contribution-stats.png)
+
+Это все очень хорошо, но как автоматизировать все это?
+**git-quick-stats** может работать не только интерактивно, но и в режиме скрипта. Например, то же самое, что мы получили интерактивно выше, можно получить командой:
+
+`C:/GIT/git-quick-stats/git-quick-stats -T`
+
 
 ## Статистика скриптом
