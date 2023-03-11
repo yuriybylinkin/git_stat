@@ -13,6 +13,7 @@
 > Любой репозиторий git может содержать массу информации о коммитах, участниках и файлах. Извлечение этой информации не всегда просто, в основном потому, что существует огромное количество опций для огромного количества команд git — не думаю, что есть хоть один человек, который знает их все. Наверное, даже сам Линус Торвальдс не знает их:)
 
 Давайте посмотрим, как выглядит статистика, получаемая **git-quick-stats**. Для получения этих картинок я обработал срепозиторий приложения git-quick-stats.
+
 ![git-commit-per-author](https://github.com/yuriybylinkin/git_stat/raw/main/Image/01-Intro-git-commit-per-author.png)
 ![git-commit-per-year](https://github.com/yuriybylinkin/git_stat/raw/main/Image/02-Intro-git-commit-per-year.png)
 
@@ -58,6 +59,7 @@
 
 ![gitextensions](https://github.com/yuriybylinkin/git_stat/raw/main/Image/03-Use-git-extensions.png)
 
+Консоль - это и есть git bash - специальная командная оболочка с возможностью выполнения линуксовых команд. 
 В консоли пишу путь к файлу скрипта git-quick-stats. Репо я склонировал в каталог Git на диске C, значит путь будет следующим:
 
 `C:/GIT/git-quick-stats/git-quick-stats`
@@ -78,5 +80,49 @@
 
 `C:/GIT/git-quick-stats/git-quick-stats -T`
 
-
 ## Статистика скриптом
+
+Ну и прекрасно. Задача решена. Есть замечательный ключ команды, который позволяет выгружать данные сразу в csv, а значит напрямую в эксель.
+
+`C:/GIT/git-quick-stats/git-quick-stats -V`
+
+Правда тут приходится ответить еще на интерактивный вопрос - какая ветка?
+
+`Which branch? master`
+
+И вот мы получаем экселеподобный текст:
+> $ C:/GIT/git-quick-stats/git-quick-stats -V
+> Which branch? master
+> author,insertions,insertions_per,deletions,deletions_per,files,files_per,commits,commits_per,lines_changed,lines_changed_per
+>  Jess <jessachandler@gmail.com>,31,1%,1,0%,1,0%,1,1%,32,0%
+>  Lukas Mestan <lukas.mestan@hyperia.sk>,88,2%,51,2%,7,3%,7,4%,139,2%
+>  Pawaer <pawaer@t-online.de>,1,0%,1,0%,1,0%,1,1%,2,0%
+>  Jorge Maldonado Ventura <jorgesumle@freakspot.net>,3,0%,3,0%,1,0%,1,1%,6,0%
+>  ...
+
+Тут у нас есть автор (**author**), количество вставленных строк (**insertions**), удаленных строк (**deletions**), измененных файлов (**files**), коммитов (**commits**), измененных строк (**lines_changed**), также в колонках с суффиксом **_per** выведены эти же значения в процентах.
+
+Уважаемые менеджеры, держите статистику.
+И тут менеджеры говорят - нам нужна статистика по неделям. Мы планируем работу программистов по неделям, соответственно хотим видеть, статистику по программистам в разрезе недель.
+
+Окей... **git-quick-stats** умеет работать с периодами. Период нельзя передать параметром, но зато можно указать в переменных окружения.
+Для установки начала периода нужно выполнить команду, эта команда устанавливает в переменную окружения _GIT_SINCE дату 2023-01-01:
+
+`export _GIT_SINCE=2023-01-01`
+
+Для установки окончания периода нужно выполнить команду, эта команда устанавливает в переменную окружения _GIT_UNTIL дату 2023-01-31:
+
+`export _GIT_UNTIL=2023-01-31`
+
+Кроме того, нам пригодится команда указания ветки репозитария в переменной окружения:
+
+`export _GIT_BRANCH=master`
+
+Проверим установку переменной _GIT_BRANCH. Выполним сначала эту команду в консоли, а затем команду вывода статистики в csv формате. Запроса имени ветки больше нет:
+
+> $ C:/GIT/git-quick-stats/git-quick-stats -V
+> author,insertions,insertions_per,deletions,deletions_per,files,files_per,commits,commits_per,lines_changed,lines_changed_per
+>  Jess <jessachandler@gmail.com>,31,1%,1,0%,1,0%,1,1%,32,0%
+>  Lukas Mestan <lukas.mestan@hyperia.sk>,88,2%,51,2%,7,3%,7,4%,139,2%
+>  Pawaer <pawaer@t-online.de>,1,0%,1,0%,1,0%,1,1%,2,0%
+> ...
